@@ -17,3 +17,7 @@ spring-boot-starter-web
 spring-boot-starter-data-redis -- planned to use it as key/value storage
 postgresql
 mockito-core and mockk
+
+
+
+TODO : enhance the readme
