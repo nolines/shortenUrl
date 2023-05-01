@@ -1,5 +1,5 @@
 package com.urlShortenerApp.urlShortenerApp.model
 
-class ShortenRequest (
+class ShortenRequest(
     val originalUrl: String
 )

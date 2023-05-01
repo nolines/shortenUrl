@@ -14,8 +14,8 @@ class Url(
     var shortenUrl: String
 ) {
     @Id
-    @Column(name="ID", nullable = false, updatable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "ID", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private val id: Long = 0
 
 }
