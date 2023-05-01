@@ -1,4 +1,16 @@
-spring.datasource.url=jdbc:postgresql://localhost:5432/urlshortener
-spring.datasource.username=admin
-spring.datasource.password=123dkb
-spring.jpa.hibernate.ddl-auto=update
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/urlshortener
+    username: admin
+    password: 123dkb
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create-drop
+        temp:
+          use_jdbc_metadata_defaults: true

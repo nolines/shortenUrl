@@ -44,7 +44,7 @@ class UrlShortenServiceTest {
     @Test
     fun `shouldRedirectUrl`() {
         val originalUrl = "www.google.com"
-        val shortenUrl = "123321123"
+        val shortenUrl = "dkb.com/191347bf"
 
         every { redisTemplate.opsForValue().get(shortenUrl) } returns originalUrl
 
