@@ -42,10 +42,9 @@ class UrlShortenControllerTest {
     fun `shouldProcessRequestThroughRedirectUrl`() {
         val hashInput = "abc123"
 
-        every { response.sendRedirect(any()) } just runs
         every { service.redirectUrl(any()) } returns ""
 
-        controller.urlRedirect(hashInput, response)
+        controller.urlRedirect(hashInput)
 
         verify { service.redirectUrl(hashInput) }
     }

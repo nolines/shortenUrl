@@ -3,9 +3,7 @@ package com.urlShortenerApp.urlShortenerApp.service
 import com.urlShortenerApp.urlShortenerApp.exception.HashNotFoundException
 import com.urlShortenerApp.urlShortenerApp.model.Url
 import com.urlShortenerApp.urlShortenerApp.repository.UrlRepository
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -33,7 +31,7 @@ class UrlShortenServiceTest {
     fun `shouldShortenUrl`() {
 
         val originalUrl = "www.google.com"
-        val shortenUrl = "191347"
+        val shortenUrl = "191347bf"
         val url = Url(originalUrl, shortenUrl)
 
         every { urlEncoder.hash(originalUrl) } returns shortenUrl
@@ -50,9 +48,9 @@ class UrlShortenServiceTest {
     }
 
     @Test
-    fun `shouldRedirectUrl`() {
+    fun `shouldRedirectUrlByRetrievingFromCache`() {
         val originalUrl = "www.google.com"
-        val shortenUrl = "dkb.com/191347bf"
+        val shortenUrl = "191347bf"
 
         every { redisTemplate.opsForValue().get(shortenUrl) } returns originalUrl
 
@@ -61,6 +59,22 @@ class UrlShortenServiceTest {
         verify { redisTemplate.opsForValue().get(shortenUrl) }
 
         Assertions.assertEquals(result, originalUrl)
+    }
+
+    @Test
+    fun `shouldRedirectUrlByRetrievingFromRepo`() {
+        val originalUrl = "www.google.com"
+        val shortenUrl = "191347bf"
+
+        every { redisTemplate.opsForValue().get(shortenUrl) } returns ""
+        every { urlRepository.findByShortenUrl(shortenUrl) } returns Url(originalUrl, shortenUrl)
+        every { redisTemplate.opsForValue().set(shortenUrl, originalUrl) } just runs
+
+        val result: Any = urlShortenService.redirectUrl(shortenUrl)
+
+        verify { redisTemplate.opsForValue().get(shortenUrl) }
+
+        Assertions.assertEquals((result as Url).originalUrl, originalUrl)
     }
 
     @Test

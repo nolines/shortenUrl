@@ -18,7 +18,7 @@ class UrlEncoderTest {
     @Test
     fun `shouldEncodeUrl`() {
         val originalUrl = "www.google.com"
-        val expectedUrl = "dkb.com/191347bf"
+        val expectedUrl = "191347bf"
 
         var result = urlEncoder.hash(originalUrl)
 

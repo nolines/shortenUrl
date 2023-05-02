@@ -1,21 +1,23 @@
 package com.urlShortenerApp.urlShortenerApp.model
 
-import jakarta.persistence.*
+import lombok.AllArgsConstructor
+import lombok.Generated
 import lombok.Getter
+import lombok.NoArgsConstructor
 import lombok.Setter
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "URLs")
-class Url(
+@Document(collection = "urls")
+data class Url(
     var originalUrl: String,
     var shortenUrl: String
 ) {
     @Id
-    @Column(name = "ID", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private val id: Long = 0
-
+    @Generated
+    lateinit var id: String
 }

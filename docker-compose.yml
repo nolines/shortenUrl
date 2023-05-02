@@ -4,12 +4,15 @@ services:
     image: redis
     ports:
       - "6379:6379"
-  db:
-    image: postgres:12
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 123dkb
-      POSTGRES_DB: urlshortener
+  mongo:
     ports:
-      - "5432:5432"
+      - '27017:27017'
+    container_name: urlshortener-mongo
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=123dkb
+    image: mongo

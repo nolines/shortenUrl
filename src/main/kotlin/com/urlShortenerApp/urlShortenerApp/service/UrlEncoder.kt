@@ -8,9 +8,12 @@ import java.security.MessageDigest
 class UrlEncoder {
     private val digest = MessageDigest.getInstance("SHA-256")
 
-    fun hash(url: String, length: Int = 16): String {
+    /**
+     * Hashing algorithm used to generate a short Url from original Url
+     * */
+    fun hash(url: String, length: Int = 8): String {
         val bytes = digest.digest(url.toByteArray())
-        val hash = String.format("dkb.com/" + "%32x", BigInteger(1, bytes))
+        val hash = String.format("%32x", BigInteger(1, bytes))
 
         return hash.take(length)
     }
