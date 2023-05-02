@@ -84,7 +84,7 @@ Response:
 
 * Since the project is for mvp purpose only, i decided to keep it simple.
 * Need to handle the redirection on the clientside or better encapsulate 500 error on backend
-* Faced issues with auto schema generation through JPA, so I decided to move to the mongodb and also mongo db will be
+* Faced issues with auto schema generation through postgresql, so I decided to move to the mongodb and also mongo db will be
   more suitable on prod.
 * Need swagger
 * Need better url validation on controllers
